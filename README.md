@@ -88,4 +88,23 @@ trans($key, $lang = null)
 }
 ```
 
-
+####If your table (model) does not match to provided `translation.sql`
+You can map your own columns like this:
+```php
+$di->setShared('translate', function ($lang = false) use ($config, $di) {
+    $adapter = new Translate(
+        'Translation',
+        $lang
+    );
+    
+    /* ... */
+    
+    $adapter->setLanguageColumn('lang');
+    $adapter->setKeyColumn('lang-key');
+    $adapter->setValueColumn('lang-value');
+    
+    /* ... */
+    
+    return $adapter;
+});
+```
