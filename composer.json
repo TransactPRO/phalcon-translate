@@ -1,0 +1,20 @@
+{
+    "name": "transactpro/phalcon-translate",
+    "description": "Translation module for Phalcon",
+    "type": "module",
+    "require": {
+        "ext-phalcon": "^2.0"
+    },
+    "authors": [
+        {
+            "name": "Vitalijs Litvinovs",
+            "email": "vl@tpro.lv"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "TransactPro\\Translation\\": "src/"
+        }
+    },
+    "minimum-stability": "stable"
+}
