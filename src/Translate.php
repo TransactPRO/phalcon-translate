@@ -2,12 +2,15 @@
 
 namespace TransactPro\Translation;
 
-
 class Translate
 {
     public $translateMap = [];
     private $defaultLanguage = 'en';
     private $fallbackLanguage = null;
+
+    private $languageColumn = 'language';
+    private $keyColumn = 'key_name';
+    private $valueColumn = 'value';
 
     /**
      * @param \Phalcon\Mvc\Model|array $modelOrMap Provide translation map as
@@ -17,7 +20,7 @@ class Translate
      *     )
      * )
      * or
-     * Phalcon\Mvc\Model
+     * \Phalcon\Mvc\Model
      * @param bool $lang
      * @param array $options array('default' => ?, 'fallback' => ?)
      */
@@ -38,28 +41,37 @@ class Translate
         }
     }
 
+    /**
+     * @param \Phalcon\Mvc\Model $modelClassName
+     * @param bool|string $lang
+     */
     private function loadFromDatabase($modelClassName, $lang = false)
     {
         if (false === $lang) {
             $translations = $modelClassName::find();
 
             foreach ($translations as $item) {
-                $this->translateMap[$item->language][$item->key_name] = $item->value;
+                $this->translateMap[$item->{$this->languageColumn}][$item->{$this->keyColumn}] = $item->{$this->valueColumn};
             }
         } else {
             $translations = $modelClassName::find([
-                'condition' => 'language = :language:',
+                'condition' => $this->languageColumn . ' = :language:',
                 'bind'      => [
                     'language' => $lang
                 ]
             ]);
 
             foreach ($translations as $item) {
-                $this->translateMap[$lang][$item->key_name] = $item->value;
+                $this->translateMap[$lang][$item->{$this->keyColumn}] = $item->{$this->valueColumn};
             }
         }
     }
 
+    /**
+     * @param string $key Translation key
+     * @param null|string $lang Translation language
+     * @return string Translation
+     */
     public function _($key, $lang = null)
     {
         if (null === $lang) {
@@ -92,7 +104,7 @@ class Translate
     }
 
     /**
-     * @return null
+     * @return null|string
      */
     public function getFallbackLanguage()
     {
@@ -100,10 +112,58 @@ class Translate
     }
 
     /**
-     * @param null $fallbackLanguage
+     * @param string|null $fallbackLanguage
      */
     public function setFallbackLanguage($fallbackLanguage)
     {
         $this->fallbackLanguage = $fallbackLanguage;
+    }
+
+    /**
+     * @return string
+     */
+    public function getLanguageColumn()
+    {
+        return $this->languageColumn;
+    }
+
+    /**
+     * @param string $languageColumn
+     */
+    public function setLanguageColumn($languageColumn)
+    {
+        $this->languageColumn = $languageColumn;
+    }
+
+    /**
+     * @return string
+     */
+    public function getKeyColumn()
+    {
+        return $this->keyColumn;
+    }
+
+    /**
+     * @param string $keyColumn
+     */
+    public function setKeyColumn($keyColumn)
+    {
+        $this->keyColumn = $keyColumn;
+    }
+
+    /**
+     * @return string
+     */
+    public function getValueColumn()
+    {
+        return $this->valueColumn;
+    }
+
+    /**
+     * @param string $valueColumn
+     */
+    public function setValueColumn($valueColumn)
+    {
+        $this->valueColumn = $valueColumn;
     }
 }
