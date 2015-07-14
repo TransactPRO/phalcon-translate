@@ -1,7 +1,7 @@
-Phalcon Translation Module (2.0.* compatible)
+Phalcon Translation Module 
 =====
-How it works:
-=====
+
+##How it works:
 This translation module is designed to be able to store/access any key in/from database. All translation map is accessible at any time without spawning new queries.
 There are three steps to match your key in translation map:
 - provided or default language
