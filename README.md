@@ -1,6 +1,7 @@
 Phalcon Translation Module 
 =====
-[![Total Downloads](https://poser.pugx.org/transactpro/phalcon-debug-widget/downloads.png)](https://packagist.org/packages/transactpro/phalcon-debug-widget)
+[![Latest Version](https://img.shields.io/packagist/v/transactpro/phalcon-translate.svg?style=flat-square)](https://github.com/transactpro/phalcon-translate/releases)
+[![Total Downloads](https://img.shields.io/packagist/dt/transactpro/phalcon-translate.svg?style=flat-square)](https://packagist.org/packages/transactpro/phalcon-translate)
 
 ##How it works:
 This translation module is designed to be able to store/access any key in/from database. All translation map is accessible at any time without spawning new queries.
