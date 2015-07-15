@@ -66,7 +66,7 @@ AUTO_INCREMENT=1;
 Example:
 ```php
 $di->setShared('translate', function ($lang = false) use ($config, $di) {
-    $adapter = new \Pak\Extensions\Translate\Translate(
+    $adapter = new \TransactPro\Translation\Translate(
         'Translation',
         $lang
     );
