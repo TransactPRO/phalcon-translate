@@ -26,11 +26,34 @@ class Translate
      */
     public function __construct($modelOrMap, $lang = false, $options = [])
     {
+        if (false !== $lang) {
+            $this->setDefaultLanguage($lang);
+        }
+        $this->defineOptions($options);
         if (is_array($modelOrMap)) {
             $this->translateMap = $modelOrMap;
         } else {
             $this->loadFromDatabase($modelOrMap, $lang);
         }
+    }
+
+    /**
+     * @param $options
+     */
+    private function defineOptions($options)
+    {
+        if (isset($options['languageColumn'])) {
+            $this->setLanguageColumn($options['languageColumn']);
+        }
+
+        if (isset($options['keyColumn'])) {
+            $this->setKeyColumn($options['keyColumn']);
+        }
+
+        if (isset($options['valueColumn'])) {
+            $this->setValueColumn($options['valueColumn']);
+        }
+
 
         if (isset($options['default'])) {
             $this->setDefaultLanguage($options['default']);
@@ -55,7 +78,7 @@ class Translate
             }
         } else {
             $translations = $modelClassName::find([
-                'condition' => $this->languageColumn . ' = :language:',
+                'conditions' => $this->languageColumn . ' = :language:',
                 'bind'      => [
                     'language' => $lang
                 ]
