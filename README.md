@@ -67,13 +67,20 @@ Example:
 ```php
 $di->setShared('translate', function ($lang = false) use ($config, $di) {
     $adapter = new \TransactPro\Translation\Translate(
-        'Translation',
+        TranslationModel::class,
         $lang
     );
     // setting default language that will be used when _() called without language parameter
     $adapter->setDefaultLanguage('en');
     // if fallback language is set, it will look in that translation map for value
     $adapter->setFallbackLanguage('de');
+    /*
+    * You can also provide them as options in third param array like:
+    * [
+    *   'default' => 'en',
+    *   'fallback' => 'de'
+    * ]
+    */
 
     return $adapter;
 });
@@ -91,21 +98,18 @@ trans($key, $lang = null)
 ```
 
 ####If your table (model) does not match to provided `translation.sql`
-You can map your own columns like this:
+You can map your own columns as option set in third param array:
 ```php
 $di->setShared('translate', function ($lang = false) use ($config, $di) {
     $adapter = new Translate(
-        'Translation',
-        $lang
+        TranslationModel::class,
+        $lang,
+        [
+          'languageColumn' => 'lang',
+          'keyColumn' => 'lang-key',
+          'valueColumn' => 'lang-value'
+        ]
     );
-    
-    /* ... */
-    
-    $adapter->setLanguageColumn('lang');
-    $adapter->setKeyColumn('lang-key');
-    $adapter->setValueColumn('lang-value');
-    
-    /* ... */
     
     return $adapter;
 });
