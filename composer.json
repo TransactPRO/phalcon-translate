@@ -2,6 +2,7 @@
     "name": "transactpro/phalcon-translate",
     "description": "Translation module for Phalcon",
     "type": "module",
+    "license": "MIT",
     "require": {
         "ext-phalcon": "^2.0"
     },
