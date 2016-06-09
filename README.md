@@ -1,5 +1,7 @@
 Phalcon Translation Module 
 =====
+[![SensioLabsInsight](https://insight.sensiolabs.com/projects/09a405f1-d1b4-4b8d-aa9d-1841964b64ea/big.png)](https://insight.sensiolabs.com/projects/09a405f1-d1b4-4b8d-aa9d-1841964b64ea)
+
 [![Latest Version](https://img.shields.io/packagist/v/transactpro/phalcon-translate.svg?style=flat-square)](https://github.com/transactpro/phalcon-translate/releases)
 [![Total Downloads](https://img.shields.io/packagist/dt/transactpro/phalcon-translate.svg?style=flat-square)](https://packagist.org/packages/transactpro/phalcon-translate)
 
